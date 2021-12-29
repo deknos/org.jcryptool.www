@@ -4,7 +4,7 @@ runtime-version: '21.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk11
-command: JCrypTool
+command: /app/jcryptool/JCrypTool
 finish-args:
   - --share=network
   - --socket=x11
@@ -17,7 +17,7 @@ modules:
         PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk11/bin
     build-commands:
       - mv JCrypTool-1.0.8-Linux-64bit.zip jcryptool.tgz
-      - tar -zxvf jcryptool.tgz
+      - tar -zxf jcryptool.tgz
       - cp -a jcryptool "${FLATPAK_DEST}/"
       - find "${FLATPAK_DEST}/jcryptool" -exec chmod 755 "{}" \;
       - install -Dm644 -t "${FLATPAK_DEST}/share/applications" "org.jcryptool.www.application.desktop"
