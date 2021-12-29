@@ -28,4 +28,4 @@ modules:
         sha256: e4d105ec896524c919b6c3184e97923576910425658372b8881be50a4c55447c
       - type: file
         url: https://raw.githubusercontent.com/deknos/org.jcryptool.www/main/org.jcryptool.www.application.desktop
-        sha256: c7fbbc0ff847a8c95a3f024874b24060374b0a52de887f2f271c5388c8ef8a29
+        sha256: 8144df40d7dc4e2e53aadae4140d9e8a113ac1487097a195e801e53f8e63b362
