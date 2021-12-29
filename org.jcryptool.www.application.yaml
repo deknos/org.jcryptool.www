@@ -9,6 +9,10 @@ finish-args:
   - --share=network
   - --socket=x11
   - --share=ipc
+ - --device=dri
+  - --socket=pulseaudio
+  - --filesystem=xdg-download
+  - --persist=.
 modules:
   - name: jcryptool
     buildsystem: simple
