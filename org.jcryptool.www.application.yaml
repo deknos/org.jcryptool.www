@@ -21,7 +21,6 @@ modules:
       - cp -a jcryptool "${FLATPAK_DEST}/"
       - find "${FLATPAK_DEST}/jcryptool" -exec chmod 755 "{}" \;
       - install -Dm644 -t "${FLATPAK_DEST}/share/applications" "org.jcryptool.www.application.desktop"
-      - ln -s "${FLATPAK_DEST}/usr/share/jcryptool/JCrypTool" "${FLATPAK_DEST}/usr/bin/jcryptool"
     sources:
       - type: file
         url: https://github.com/jcryptool/core/releases/download/1.0.8/JCrypTool-1.0.8-Linux-64bit.zip
