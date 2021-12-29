@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=JCrypTool
+Comment=Tool for learning about cryptography
+Icon=com.example.jcryptool
+Exec=/app/bin/jcryptool
+Categories=Desktop;
+Type=Application
+Terminal=false
+StartupNotify=true
+
