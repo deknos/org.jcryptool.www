@@ -6,6 +6,8 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk11
 command: JCrypTool
 finish-args:
+  - --filesystem=host
+  - --filesystem=/tmp:rw
   - --share=network
   - --socket=x11
   - --share=ipc
@@ -19,22 +21,41 @@ finish-args:
   - --env=JAVA_HOME=/app/jre
   - --env=GDK_BACKEND=x11
 modules:
-  - name: jcryptool
+  - name: JCrypTool
     buildsystem: simple
     build-options:
       env:
         PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk11/bin
     build-commands:
-      - mv jcryptool /app/
-      - mkdir /app/bin
-      - ln -s /app/jcryptool/JCrypTool /app/bin/
-      - install -Dm644 -t "${FLATPAK_DEST}/share/applications" "org.jcryptool.www.application.desktop"
+      - mv jcryptool /app
+      - mkdir -p /app/bin
+      - ln -s /app/jcryptool/JCrypTool /app/bin
+      - install -Dm 644 org.jcryptool.www.application.desktop /app/share/applications/org.jcryptool.www.application.desktop
+      - install -Dm 644 flatpak-dev-shim-1.0.1-SNAPSHOT.jar /app/jcryptool/flatpak-dev-shim.jar
+      - install -Dm 644 flatpak-dev-shim-1.0.1-SNAPSHOT.so /app/lib/libflatpakdevshim.so
+      - sed -i -e '/osgi.configuration.area/d' /app/jcryptool/JCrypTool.ini
+      - echo "-Dosgi.configuration.area=@user.home/.var/app/org.jcryptool.www.application/jcryptool/configuration"
+        >> /app/jcryptool/JCrypTool.ini
+      - echo "--patch-module=java.base=/app/jcryptool/flatpak-dev-shim.jar" >> /app/jcryptool/JCrypTool.ini
+      - echo "-Dsun.boot.library.path=/app/lib" >> /app/jcryptool/JCrypTool.ini
     sources:
       - type: archive
         url: https://github.com/jcryptool/core/releases/download/1.0.8/JCrypTool-1.0.8-Linux-64bit.zip
         sha256: e4d105ec896524c919b6c3184e97923576910425658372b8881be50a4c55447c
+        strip-components: 0
         archive-type: "tar-gzip"
+        dest-filename: JCrypTool.tgz
+      - dest-filename: flatpak-dev-shim-1.0.1-SNAPSHOT.jar
+        sha256: 4ad46178d0c288a8a117034aad19f2373811748860b5c460f37e8335ea44ad4e
+        type: file
+        url: https://repo.eclipse.org/content/repositories/linuxtools/org/eclipse/linuxtools/flatpak/flatpak-dev-shim/1.0.1-SNAPSHOT/flatpak-dev-shim-1.0.1-20211216.040236-6.jar
+      - dest-filename: flatpak-dev-shim-1.0.1-SNAPSHOT.so
+        sha256: 345473289c3fae35074d5659e31898c8a90351b507d5361b95400c741e49f7a8
+        type: file
+        url: https://repo.eclipse.org/content/repositories/linuxtools/org/eclipse/linuxtools/flatpak/flatpak-dev-shim/1.0.1-SNAPSHOT/flatpak-dev-shim-1.0.1-20211216.040236-6.so
       - type: file
+        dest-filename: org.jcryptool.www.application.desktop
         url: https://raw.githubusercontent.com/deknos/org.jcryptool.www/main/org.jcryptool.www.application.desktop
+        path: org.jcryptool.www.application.desktop
         sha256: d3d1a03e62f2bf2c3a8dda72915fdf83b31fd0e8783d3296e086a2f19ccaeea4
 
