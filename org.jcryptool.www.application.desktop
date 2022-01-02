@@ -2,7 +2,7 @@
 Name=JCrypTool
 Comment=Tool for learning about cryptography
 Icon=com.example.jcryptool
-Exec=jcryptool
+Exec=JCrypTool
 Categories=Desktop;
 Type=Application
 Terminal=false
