@@ -33,7 +33,6 @@ modules:
       - type: archive
         url: https://github.com/jcryptool/core/releases/download/1.0.8/JCrypTool-1.0.8-Linux-64bit.zip
         sha256: e4d105ec896524c919b6c3184e97923576910425658372b8881be50a4c55447c
-        strip-components: 0
         archive-type: "tar-gzip"
       - type: file
         url: https://raw.githubusercontent.com/deknos/org.jcryptool.www/main/org.jcryptool.www.application.desktop
