@@ -4,7 +4,7 @@ runtime-version: '21.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk11
-command: /app/jcryptool/JCrypTool
+command: jcryptool
 finish-args:
   - --share=network
   - --socket=x11
@@ -12,7 +12,6 @@ finish-args:
   - --device=dri
   - --socket=pulseaudio
   - --filesystem=xdg-download
-  - --persist=.
   - --allow=devel
   - --socket=session-bus
   - --socket=wayland
@@ -26,15 +25,16 @@ modules:
       env:
         PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk11/bin
     build-commands:
-      - mv JCrypTool-1.0.8-Linux-64bit.zip jcryptool.tgz
-      - tar -zxf jcryptool.tgz
-      - cp -a jcryptool "${FLATPAK_DEST}/"
-      - find "${FLATPAK_DEST}/jcryptool" -exec chmod 755 "{}" \;
+      - mv jcryptool /app/
+      - ln -s /app/jcryptool/JCryptool /app/bin/jcryptool
       - install -Dm644 -t "${FLATPAK_DEST}/share/applications" "org.jcryptool.www.application.desktop"
     sources:
-      - type: file
+      - type: archive
         url: https://github.com/jcryptool/core/releases/download/1.0.8/JCrypTool-1.0.8-Linux-64bit.zip
         sha256: e4d105ec896524c919b6c3184e97923576910425658372b8881be50a4c55447c
+        strip-components: 0
+        archive-type: "tar-gzip"
       - type: file
         url: https://raw.githubusercontent.com/deknos/org.jcryptool.www/main/org.jcryptool.www.application.desktop
         sha256: 8144df40d7dc4e2e53aadae4140d9e8a113ac1487097a195e801e53f8e63b362
+
