@@ -26,6 +26,7 @@ modules:
         PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk11/bin
     build-commands:
       - mv jcryptool /app/
+      - mkdir /app/bin
       - ln -s /app/jcryptool/JCrypTool /app/bin/
       - install -Dm644 -t "${FLATPAK_DEST}/share/applications" "org.jcryptool.www.application.desktop"
     sources:
