@@ -36,5 +36,5 @@ modules:
         archive-type: "tar-gzip"
       - type: file
         url: https://raw.githubusercontent.com/deknos/org.jcryptool.www/main/org.jcryptool.www.application.desktop
-        sha256: 8144df40d7dc4e2e53aadae4140d9e8a113ac1487097a195e801e53f8e63b362
+        sha256: 50b20288b29effd4f6bfd23dd910bdaaf7fdf440f2accb9aa6bff50fa34acaf2
 
