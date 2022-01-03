@@ -1,11 +1,10 @@
 app-id: org.jcryptool.www.application
-runtime: org.freedesktop.Platform
-runtime-version: '21.08'
-sdk: org.freedesktop.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.openjdk11
+runtime: org.gnome.Platform
+runtime-version: '41'
+sdk: org.gnome.Sdk
 command: JCrypTool
 finish-args:
+  - --require-version=1.7.1
   - --filesystem=host
   - --filesystem=/tmp:rw
   - --share=network
@@ -34,8 +33,7 @@ modules:
       - install -Dm 644 flatpak-dev-shim-1.0.1-SNAPSHOT.jar /app/jcryptool/flatpak-dev-shim.jar
       - install -Dm 644 flatpak-dev-shim-1.0.1-SNAPSHOT.so /app/lib/libflatpakdevshim.so
       - sed -i -e '/osgi.configuration.area/d' /app/jcryptool/JCrypTool.ini
-      - echo "-Dosgi.configuration.area=@user.home/.var/app/org.jcryptool.www.application/jcryptool/configuration"
-        >> /app/jcryptool/JCrypTool.ini
+      - echo "-Dosgi.configuration.area=@user.home/.var/app/org.jcryptool.www.application/jcryptool/configuration" >> /app/jcryptool/JCrypTool.ini
       - echo "--patch-module=java.base=/app/jcryptool/flatpak-dev-shim.jar" >> /app/jcryptool/JCrypTool.ini
       - echo "-Dsun.boot.library.path=/app/lib" >> /app/jcryptool/JCrypTool.ini
     sources:
